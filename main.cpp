@@ -5,7 +5,7 @@
 #include <sys/syscall.h>
 int f1() __attribute__((privilegeSeparation(9)));
 int f2() __attribute__((privilegeSeparation(8)));
-int f3() __attribute__((privilegeSeparation(9)));
+int f3() __attribute__((privilegeSeparation(5)));
 int f4() __attribute__((privilegeSeparation(5)));
 int f5() __attribute__((privilegeSeparation(5)));
 int f6() __attribute__((privilegeSeparation(5)));
@@ -27,7 +27,7 @@ std::cout << "SADFSADFASDFASDFASDFASDF" << std::endl;
 std::cout << "SADFSADFASDFASDFASDFASDF" << std::endl;
 std::cout << "SADFSADFASDFASDFASDFASDF" << std::endl;
 std::cout << "SADFSADFASDFASDFASDFASDF" << std::endl;
-
+    f3();
     int i;
     i = 1 +1;
     return 1;
@@ -38,6 +38,7 @@ int f1()
     return 1;
 }
 int f4() {
+    f3();
     std::cout << "Hello World 4!" << std::endl;
     return 4;
 }
@@ -79,18 +80,14 @@ int f9()
 }
 int __attribute__((privilegeSeparation(9))) main(void)
 {
-    syscall(352, 5);
-    f1();
+    f();
     f2();
-    f3();
     f4();
     f5();
-    syscall(352, 1);
     f6();
     f7();
     f8();
     f9();
-    f(); 
-    std::cout << "Hello World!" << std::endl;
-    return 1;
+    f();
+    return 0;
 }
